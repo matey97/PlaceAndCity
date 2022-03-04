@@ -8,9 +8,10 @@
     </div>
   </nav>
 
-  <div class="row flex-grow-1" style="padding: 10px">
+  <div class="row flex-grow-1 spaced">
     <div class="col-lg-7 flex-fill">
-      <app-map-view (areaChange)="onAreaChange($event)">
+      <app-map-view [drawEnabled]="mapDrawEnabled"
+                    (areaChange)="onAreaChange($event)">
       </app-map-view>
     </div>
 

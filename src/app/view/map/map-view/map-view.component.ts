@@ -13,16 +13,18 @@ const DEFAULT_TILE = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 })
 export class MapViewComponent {
 
-  @Input() mapCenter = CASTELLON
-  @Input() mapZoom = 13
+  @Input() mapCenter = CASTELLON;
+  @Input() mapZoom = 13;
 
-  @Input() position: ControlPosition = "topleft"
-  @Input() polygonColor: string = '#1384f5'
+  @Input() position: ControlPosition = "topleft";
+  @Input() polygonColor: string = '#1384f5';
+
+  @Input() drawEnabled: boolean = false;
 
   @Output() areaChange = new EventEmitter<AreaChange>();
 
-  options: any
-  drawnItems: FeatureGroup = featureGroup()
+  options: any;
+  drawnItems: FeatureGroup = featureGroup();
   drawOptions: Control.DrawConstructorOptions;
   drawLocal: any;
 
@@ -35,37 +37,37 @@ export class MapViewComponent {
       center: this.mapCenter
     };
 
-    this.drawnItems = featureGroup()
+    this.drawnItems = featureGroup();
     this.drawOptions = getDrawOptions(this.drawnItems, {
       position: this.position,
       polygonColor: this.polygonColor
-    })
-    this.drawLocal = getDrawLocal()
+    });
+    this.drawLocal = getDrawLocal();
   }
 
   onDrawCreated(e: DrawEvents.Created) {
     this.drawnItems.addLayer(e.layer);
-    this.emitEventForChange([e.layer], Change.ADD)
+    this.emitEventForChange([e.layer], Change.ADD);
   }
 
   onDrawEdited(e: DrawEvents.Edited) {
-    this.emitEventForChange(e.layers.getLayers(), Change.MODIFY)
+    this.emitEventForChange(e.layers.getLayers(), Change.MODIFY);
   }
 
   onDrawDeleted(e: DrawEvents.Deleted) {
-    this.emitEventForChange(e.layers.getLayers(), Change.DELETE)
+    this.emitEventForChange(e.layers.getLayers(), Change.DELETE);
   }
 
   private emitEventForChange(layers: any[], changeType: Change) {
     layers.forEach(layer => {
-      const areaChange = this.toAreaChange(layer, changeType)
+      const areaChange = this.toAreaChange(layer, changeType);
       this.areaChange.emit(areaChange);
     })
   }
 
   private toAreaChange(layer: any, changeType: Change): AreaChange {
-    const areaId = this.drawnItems.getLayerId(layer)
-    return buildAreaChange(changeType, areaId, layer.toGeoJSON())
+    const areaId = this.drawnItems.getLayerId(layer);
+    return buildAreaChange(changeType, areaId, layer.toGeoJSON());
   }
 }
 
