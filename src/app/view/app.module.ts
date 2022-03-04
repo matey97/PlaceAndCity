@@ -7,25 +7,23 @@ import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { MapModule } from "./map/map.module";
 import { LeafletDrawModule } from "@asymmetrik/ngx-leaflet-draw";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FormsModule} from "@angular/forms";
-import { AreaInformationComponent } from '../area/area-information/area-information.component';
-import { InformationPanelComponent } from './information-panel/information-panel.component';
+import { FormsModule } from "@angular/forms";
+import { InformationPanelModule } from "./information-panel/information-panel.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    AreaInformationComponent,
-    InformationPanelComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        LeafletModule,
-        LeafletDrawModule,
-        MapModule,
-        BrowserAnimationsModule,
-        FormsModule
-    ],
+  imports: [
+      BrowserModule,
+      AppRoutingModule,
+      LeafletModule,
+      LeafletDrawModule,
+      MapModule,
+      BrowserAnimationsModule,
+      FormsModule,
+      InformationPanelModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
