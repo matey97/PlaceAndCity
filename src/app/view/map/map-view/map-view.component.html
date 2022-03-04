@@ -1,0 +1,13 @@
+<div class="map-view"
+     leaflet
+     [leafletOptions]="options"
+>
+  <div leafletDraw
+       [leafletDrawOptions]="drawOptions"
+       [leafletDrawLocal]="drawLocal"
+       (leafletDrawCreated)="onDrawCreated($event)"
+       (leafletDrawEdited)="onDrawEdited($event)"
+       (leafletDrawDeleted)="onDrawDeleted($event)"
+  ></div>
+  <div [leafletLayer]="drawnItems"></div>
+</div>
