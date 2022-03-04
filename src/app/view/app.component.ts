@@ -9,23 +9,45 @@ import { Area, AreaChange, Change } from "../model/area";
 export class AppComponent {
   title = 'Place and City';
 
-  areas: Map<number, Area> = new Map<number, Area>()
+  mapDrawEnabled: boolean = false;
+  areaDrawn: boolean = false;
+
+  status: typeof Status = Status;
+  currentStatus: Status = Status.APP_INFO;
+
+  areas: Map<number, Area> = new Map<number, Area>();
 
   constructor(
   ) {
   }
 
   onAreaChange(areaChange: AreaChange) {
-    const area = areaChange.area
+    const area = areaChange.area;
     switch (areaChange.change) {
       case Change.ADD:
-        this.areas.set(area.id, area)
-        break
       case Change.MODIFY:
-        this.areas.set(area.id, area)
-        break
+        this.areas.set(area.id, area);
+        this.areaDrawn = true;
+        break;
       case Change.DELETE:
-        this.areas.delete(area.id)
+        this.areas.delete(area.id);
+        this.areaDrawn = false;
     }
   }
+
+  onStartDrawing() {
+    this.mapDrawEnabled = true;
+    this.currentStatus = Status.DRAW_INFO;
+  }
+
+  startAreaQuestions() {
+    this.mapDrawEnabled = false;
+    this.currentStatus = Status.AREA_QUESTIONS;
+  }
+}
+
+export enum Status {
+  APP_INFO,
+  DRAW_INFO,
+  AREA_QUESTIONS
 }

@@ -16,7 +16,18 @@
     </div>
 
     <div class="col-lg-5 flex-fill">
-      <app-usage-info></app-usage-info>
+      <div class="container-fluid">
+        <div [ngSwitch]="currentStatus">
+          <app-usage-info *ngSwitchCase="status.APP_INFO"
+                          (startDrawing)="onStartDrawing()">
+
+          </app-usage-info>
+          <app-drawing-info *ngSwitchCase="status.DRAW_INFO"
+                            [enableContinue]="areaDrawn"
+                            (areaReady)="startAreaQuestions()">
+          </app-drawing-info>
+        </div>
+      </div>
     </div>
   </div>
 </div>

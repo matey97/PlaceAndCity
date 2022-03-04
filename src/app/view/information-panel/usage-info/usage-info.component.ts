@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-usage-info',
   templateUrl: './usage-info.component.html',
   styleUrls: ['./usage-info.component.scss']
 })
-export class UsageInfoComponent implements OnInit {
+export class UsageInfoComponent {
+
+  @Output() startDrawing = new EventEmitter<void>();
 
   constructor() { }
 
-  ngOnInit(): void {
+  onLetsGoClick() {
+    this.startDrawing.emit();
   }
-
 }
