@@ -1,0 +1,32 @@
+<div class="h3 text-center">Draw an area of interest</div>
+
+<div>
+  <mat-card style="background-color: cornsilk">
+    <mat-card-title>Instructions</mat-card-title>
+    <mat-card-content>
+      <ul>
+        <li>
+          Move to a desired place. Use the mousewheel or <mat-icon aria-hidden="true" inline="true">add</mat-icon>/
+          <mat-icon aria-hidden="true" inline="true">remove</mat-icon> to change the zoom level.
+        </li>
+        <li>Click on <mat-icon aria-hidden="true" inline="true">pentagon</mat-icon> and start drawing an area.</li>
+        <li>
+          To finish the area, click on the area's first point or click on the <i>Finish</i> button next to
+          <mat-icon aria-hidden="true" inline="true">pentagon</mat-icon>.
+        </li>
+        <li>
+          After finishing the area, it can still be edited using the <mat-icon aria-hidden="true" inline="true">draw</mat-icon> icon.
+          When edition is finished, click on <i>Save</i> or <i>Cancel</i> next to <mat-icon aria-hidden="true" inline="true">draw</mat-icon> to save or rollback the changes.
+        </li>
+        <li>
+          The drawn area can be removed using the <mat-icon aria-hidden="true" inline="true">delete</mat-icon> icon.
+          After removal, click on <i>Save</i> or <i>Cancel</i> next to <mat-icon aria-hidden="true" inline="true">delete</mat-icon> to save or rollback the changes.
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div *ngIf="enableContinue" style="padding-top: 10px">
+  <button mat-raised-button color="primary" (click)="onAreaReady()">Done!</button>
+</div>
