@@ -1,6 +1,8 @@
 <div class="map-view"
      leaflet
      [leafletOptions]="options"
+     [leafletLayers]="_drawnAreas"
+     (leafletMapReady)="onMapReady($event)"
 >
   <div *ngIf="drawEnabled"
        leafletDraw

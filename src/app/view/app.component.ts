@@ -16,7 +16,8 @@ export class AppComponent {
   status: typeof Status = Status;
   currentStatus: Status = Status.APP_INFO;
 
-  areas: Map<number, Area> = new Map<number, Area>();
+  areas: Area[] = []
+  currentArea!: Area;
 
   constructor(
   ) {
@@ -27,17 +28,18 @@ export class AppComponent {
     switch (areaChange.change) {
       case Change.ADD:
       case Change.MODIFY:
-        this.areas.set(area.id, area);
+        this.currentArea = area;
         this.areaDrawn = true;
         break;
       case Change.DELETE:
-        this.areas.delete(area.id);
+        this.areas.filter((ar) => ar.id !== area.id);
         this.areaDrawn = false;
     }
   }
 
   onStartDrawing() {
     this.mapDrawEnabled = true;
+    this.areaDrawn = false;
     this.currentStatus = Status.DRAW_INFO;
   }
 
@@ -47,7 +49,9 @@ export class AppComponent {
   }
 
   onAreaAnswers(answers: AreaAnswers) {
-    console.log(answers);
+    this.currentArea.name = answers.name;
+    this.areas = this.areas.concat(this.currentArea);
+    this.onStartDrawing();
   }
 }
 

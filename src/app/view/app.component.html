@@ -11,6 +11,7 @@
   <div class="row flex-grow-1 spaced">
     <div class="col-lg-7 flex-fill">
       <app-map-view [drawEnabled]="mapDrawEnabled"
+                    [drawnAreas]="areas"
                     (areaChange)="onAreaChange($event)">
       </app-map-view>
     </div>

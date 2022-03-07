@@ -1,5 +1,6 @@
 export interface Area {
   id: number,
+  name: string,
   geojson: any,
 }
 
@@ -17,6 +18,7 @@ export function buildAreaChange(change: Change, id: number, geojson: any): AreaC
     change: change,
     area: {
       id: id,
+      name: "",
       geojson: geojson,
     }
   }
