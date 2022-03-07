@@ -26,6 +26,8 @@
                             [enableContinue]="areaDrawn"
                             (areaReady)="startAreaQuestions()">
           </app-drawing-info>
+          <app-area-questions *ngSwitchCase="status.AREA_QUESTIONS">
+          </app-area-questions>
         </div>
       </div>
     </div>
