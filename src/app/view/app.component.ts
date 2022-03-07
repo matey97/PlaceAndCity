@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Area, AreaChange, Change } from "../model/area";
+import { AreaAnswers } from "./information-panel/area-questions/area-questions.component";
 
 @Component({
   selector: 'app-root',
@@ -43,6 +44,10 @@ export class AppComponent {
   startAreaQuestions() {
     this.mapDrawEnabled = false;
     this.currentStatus = Status.AREA_QUESTIONS;
+  }
+
+  onAreaAnswers(answers: AreaAnswers) {
+    console.log(answers);
   }
 }
 

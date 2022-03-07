@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { likertQuestions } from "./likert-questions";
 
@@ -8,6 +8,8 @@ import { likertQuestions } from "./likert-questions";
   styleUrls: ['./area-questions.component.scss']
 })
 export class AreaQuestionsComponent implements OnInit {
+
+  @Output() answers = new EventEmitter<AreaAnswers>()
 
   nameForm!: FormGroup;
   freeText!: FormGroup;
@@ -26,10 +28,24 @@ export class AreaQuestionsComponent implements OnInit {
       text: ["", Validators.required]
     });
 
-    const questionsConfig: {[p: string]: any} = {}
+    const questionsConfig: {[p: string]: any} = {};
     this.likertQuestions.forEach((question) => {
       questionsConfig[question.id] = ["", Validators.required]
-    })
-    this.questions = this.formBuilder.group(questionsConfig)
+    });
+    this.questions = this.formBuilder.group(questionsConfig);
   }
+
+  onQuestionsAnswered() {
+    this.answers.emit({
+      name: this.nameForm.value["name"],
+      freeText: this.freeText.value["text"],
+      questions: this.questions.value
+    });
+  }
+}
+
+export interface AreaAnswers {
+  name: string,
+  freeText: string,
+  questions: [{string: number}]
 }
