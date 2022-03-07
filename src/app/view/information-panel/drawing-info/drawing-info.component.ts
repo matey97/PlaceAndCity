@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Area } from "../../../model/area";
 
 @Component({
   selector: 'app-drawing-info',
@@ -8,6 +9,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class DrawingInfoComponent {
 
   @Input() enableContinue: boolean = false;
+  @Input() drawnAreas: Area[] = []
+
   @Output() areaReady = new EventEmitter<void>();
 
   constructor() { }

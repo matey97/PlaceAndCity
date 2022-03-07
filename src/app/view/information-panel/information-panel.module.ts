@@ -12,6 +12,8 @@ import { MatInputModule } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
 import { LikertQuestionComponent } from './area-questions/likert-question/likert-question.component';
 import { MatRadioModule } from "@angular/material/radio";
+import { MatChipsModule } from "@angular/material/chips";
+import { MatDividerModule } from "@angular/material/divider";
 
 
 
@@ -36,7 +38,9 @@ import { MatRadioModule } from "@angular/material/radio";
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatChipsModule,
+    MatDividerModule
   ],
 })
 export class InformationPanelModule { }

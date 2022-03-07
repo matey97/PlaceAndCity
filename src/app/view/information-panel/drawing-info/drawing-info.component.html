@@ -27,6 +27,23 @@
   </mat-card>
 </div>
 
-<div *ngIf="enableContinue" style="padding-top: 10px">
-  <button mat-raised-button color="primary" (click)="onAreaReady()">Done!</button>
+<div *ngIf="drawnAreas.length" class="top-spaced">
+  <mat-divider></mat-divider>
+  <h2>Your areas:</h2>
+  <mat-chip-list>
+    <mat-chip *ngFor="let area of drawnAreas">
+      {{ area.name }}
+    </mat-chip>
+  </mat-chip-list>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <span>You can finish here or keep adding more areas</span>
+    <button mat-button color="accent">Finish</button>
+  </div>
+
+</div>
+
+<div *ngIf="enableContinue" class="top-spaced">
+  <mat-divider style="padding-bottom: 10px"></mat-divider>
+  <button mat-raised-button color="primary" (click)="onAreaReady()">Add area!</button>
 </div>

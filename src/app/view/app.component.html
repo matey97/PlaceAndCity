@@ -25,6 +25,7 @@
           </app-usage-info>
           <app-drawing-info *ngSwitchCase="status.DRAW_INFO"
                             [enableContinue]="areaDrawn"
+                            [drawnAreas]="areas"
                             (areaReady)="startAreaQuestions()">
           </app-drawing-info>
           <app-area-questions *ngSwitchCase="status.AREA_QUESTIONS" (answers)="onAreaAnswers($event)">
