@@ -1,0 +1,56 @@
+<div class="h3 text-center">Some information about the area</div>
+
+<mat-vertical-stepper #stepper [linear]="true">
+  <mat-step [stepControl]="nameForm" label="Give a name to the area">
+    <form [formGroup]="nameForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Area's name</mat-label>
+        <input matInput formControlName="name" required>
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button matStepperNext color="primary">Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="freeText" label="Write your thoughts about this area">
+    <form [formGroup]="freeText">
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Some thoughts</mat-label>
+        <textarea matInput formControlName="text" rows="8" required></textarea>
+      </mat-form-field>
+
+      <div>
+        <button mat-button matStepperPrevious color="primary">Back</button>
+        <button mat-raised-button matStepperNext color="primary">Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="questions" label="Answer a couple of questions">
+    <form [formGroup]="questions">
+      <app-likert-question *ngFor="let question of likertQuestions"
+                           [formControlName]="question.id"
+                           [question]="question.question"
+                           [min]="question.minValue"
+                           [minLabel]="question.minLabel"
+                           [max]="question.maxValue"
+                           [maxLabel]="question.maxLabel"></app-likert-question>
+
+      <div>
+        <button mat-button matStepperPrevious color="primary">Back</button>
+        <button mat-raised-button matStepperNext color="primary">Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step label="Finish">
+    <p>We are done with this area!</p>
+
+    <div class="d-flex justify-content-between">
+      <button mat-button matStepperPrevious color="primary">Back</button>
+      <button mat-raised-button matStepperNext color="primary">Done!</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
