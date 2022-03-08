@@ -7,6 +7,7 @@ import { MapModule } from "./map/map.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from "@angular/forms";
 import { InformationPanelModule } from "./information-panel/information-panel.module";
+import { ServicesModule } from "../services/services.module";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { InformationPanelModule } from "./information-panel/information-panel.mo
       MapModule,
       BrowserAnimationsModule,
       FormsModule,
-      InformationPanelModule
+      InformationPanelModule,
+      ServicesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

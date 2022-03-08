@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { DrawnArea, AreaChange, Change, InterestArea, AreaAnswers } from "../model/area";
+import { Component} from '@angular/core';
+import { AreaAnswers, AreaChange, buildInterestArea, Change, DrawnArea, InterestArea } from "../model/area";
+import { FirestoreService} from "../services/firestore/firestore.service";
+import { CommandStatus } from "../services/firestore/command";
 
 @Component({
   selector: 'app-root',
@@ -18,7 +20,10 @@ export class AppComponent {
   currentArea!: DrawnArea;
   interestAreas: InterestArea[] = []
 
+  commandStatus: Map<string, CommandStatus> = new Map<string, CommandStatus>();
+
   constructor(
+    private firestoreService: FirestoreService
   ) {
   }
 
@@ -47,8 +52,21 @@ export class AppComponent {
   }
 
   onAreaAnswers(answers: AreaAnswers) {
-    this.currentArea.name = answers.name;
-    this.areas = this.areas.concat(this.currentArea);
+    const interestArea = buildInterestArea(this.currentArea, answers);
+    this.interestAreas = this.interestAreas.concat(interestArea);
+
+    this.firestoreService.createDataExtractionCommandFrom(interestArea)
+      .then(() => {
+        const subscription = this.firestoreService
+          .listenForCommandStatusChange(interestArea, (commandStatus) => {
+            this.commandStatus = this.commandStatus.set(interestArea.id, commandStatus);
+
+            if (commandStatus == CommandStatus.COMPLETED) {
+              subscription.unsubscribe();
+            }
+          });
+      });
+
     this.onStartDrawing();
   }
 
