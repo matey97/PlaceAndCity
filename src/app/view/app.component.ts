@@ -51,10 +51,16 @@ export class AppComponent {
     this.areas = this.areas.concat(this.currentArea);
     this.onStartDrawing();
   }
+
+  onDrawingFinished() {
+    this.mapDrawEnabled = false;
+    this.currentStatus = Status.FINISH;
+  }
 }
 
 export enum Status {
   APP_INFO,
   DRAW_INFO,
-  AREA_QUESTIONS
+  AREA_QUESTIONS,
+  FINISH
 }

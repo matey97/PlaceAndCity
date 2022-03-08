@@ -12,10 +12,15 @@ export class DrawingInfoComponent {
   @Input() drawnAreas: InterestArea[] = []
 
   @Output() areaReady = new EventEmitter<void>();
+  @Output() finishDrawing = new EventEmitter<void>();
 
   constructor() { }
 
   onAreaReady() {
     this.areaReady.emit()
+  }
+
+  onFinishDrawing() {
+    this.finishDrawing.emit();
   }
 }
