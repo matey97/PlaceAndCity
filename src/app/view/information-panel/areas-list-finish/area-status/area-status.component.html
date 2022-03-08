@@ -1,0 +1,19 @@
+<mat-card class="area-card">
+  <div class="d-flex justify-content-between">
+    <div>
+      <mat-card-title>{{ area.answers.name }}</mat-card-title>
+      <mat-card-subtitle *ngIf="status === 0 else ready">Retrieving data...</mat-card-subtitle>
+      <ng-template #ready><mat-card-subtitle>Data retrieved</mat-card-subtitle></ng-template>
+    </div>
+
+    <div style="padding-left: 10px">
+      <button mat-icon-button color="primary" [disabled]="status === 0">
+        <mat-icon>download</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <mat-card-footer>
+    <mat-progress-bar [mode]="status === 0 ? 'indeterminate' : 'determinate'" [value]="100"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

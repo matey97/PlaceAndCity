@@ -14,6 +14,9 @@ import { LikertQuestionComponent } from './area-questions/likert-question/likert
 import { MatRadioModule } from "@angular/material/radio";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatDividerModule } from "@angular/material/divider";
+import { AreasListFinishComponent } from './areas-list-finish/areas-list-finish.component';
+import { AreaStatusComponent } from './areas-list-finish/area-status/area-status.component';
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 
 
@@ -22,13 +25,16 @@ import { MatDividerModule } from "@angular/material/divider";
     UsageInfoComponent,
     DrawingInfoComponent,
     AreaQuestionsComponent,
-    LikertQuestionComponent
+    LikertQuestionComponent,
+    AreasListFinishComponent,
+    AreaStatusComponent
   ],
-  exports: [
-    UsageInfoComponent,
-    DrawingInfoComponent,
-    AreaQuestionsComponent
-  ],
+    exports: [
+        UsageInfoComponent,
+        DrawingInfoComponent,
+        AreaQuestionsComponent,
+        AreasListFinishComponent
+    ],
   imports: [
     CommonModule,
     MatCardModule,
@@ -40,7 +46,8 @@ import { MatDividerModule } from "@angular/material/divider";
     ReactiveFormsModule,
     MatRadioModule,
     MatChipsModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressBarModule
   ],
 })
 export class InformationPanelModule { }

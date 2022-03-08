@@ -1,0 +1,21 @@
+<div class="h3 text-center">Your data!</div>
+
+<p>
+  Here you can download in your preferred format all the data obtained for the specified areas.
+  Once the data is ready, you can download the data for individual areas by pressing its icon
+  <mat-icon inline="true">download</mat-icon>.
+  You can also download the data from all the areas at once by pressing the button <i>Download all</i>.
+</p>
+
+<div *ngFor="let area of drawnAreas" class="d-flex justify-content-center">
+  <app-area-status [area]="area"
+                   [status]="commandStatus.get(area.id)">
+  </app-area-status>
+</div>
+
+<div class="d-flex justify-content-center">
+  <button mat-raised-button color="primary">
+    <mat-icon>download</mat-icon>
+    Download all
+  </button>
+</div>
