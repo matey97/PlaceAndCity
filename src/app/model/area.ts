@@ -1,3 +1,5 @@
+import { v4 as uuid } from "uuid";
+
 export interface DrawnArea {
   id: number,
   geojson: any,
@@ -10,6 +12,7 @@ export interface AreaAnswers {
 }
 
 export interface InterestArea {
+  id: string,
   area: DrawnArea,
   answers: AreaAnswers
 }
@@ -21,6 +24,14 @@ export interface AreaChange {
 
 export enum Change {
   ADD, MODIFY, DELETE
+}
+
+export function buildInterestArea(area: DrawnArea, answers: AreaAnswers) {
+  return {
+    id: uuid(),
+    area: area,
+    answers: answers
+  };
 }
 
 export function buildAreaChange(change: Change, id: number, geojson: any): AreaChange {
