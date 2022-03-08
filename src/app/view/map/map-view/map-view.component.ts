@@ -12,7 +12,7 @@ import {
   tileLayer
 } from "leaflet";
 import { getDrawLocal, getDrawOptions } from "./map-configuration";
-import { Area, AreaChange, buildAreaChange, Change } from "../../../model/area";
+import { AreaChange, buildAreaChange, Change, InterestArea } from "../../../model/area";
 
 const CASTELLON = latLng(39.986324,-0.040872)
 const DEFAULT_TILE = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -33,9 +33,9 @@ export class MapViewComponent {
   @Input() drawEnabled: boolean = false;
 
   _drawnAreas!: Layer[];
-  @Input() set drawnAreas(areas: Area[]) {
-    this._drawnAreas = areas
-      .map(area => GeoJSON.geometryToLayer(area.geojson).bindPopup(area.name))
+  @Input() set drawnAreas(interestAreas: InterestArea[]) {
+    this._drawnAreas = interestAreas
+      .map(area => GeoJSON.geometryToLayer(area.area.geojson).bindPopup(area.answers.name))
     this.drawnItems.clearLayers();
 
     if (this.map !== undefined) {

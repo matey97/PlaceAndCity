@@ -1,6 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { likertQuestions } from "./likert-questions";
+import { AreaAnswers } from "../../../model/area";
 
 @Component({
   selector: 'app-area-questions',
@@ -42,10 +43,4 @@ export class AreaQuestionsComponent implements OnInit {
       questions: this.questions.value
     });
   }
-}
-
-export interface AreaAnswers {
-  name: string,
-  freeText: string,
-  questions: [{string: number}]
 }

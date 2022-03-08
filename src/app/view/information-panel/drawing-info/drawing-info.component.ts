@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Area } from "../../../model/area";
+import { InterestArea } from "../../../model/area";
 
 @Component({
   selector: 'app-drawing-info',
@@ -9,7 +9,7 @@ import { Area } from "../../../model/area";
 export class DrawingInfoComponent {
 
   @Input() enableContinue: boolean = false;
-  @Input() drawnAreas: Area[] = []
+  @Input() drawnAreas: InterestArea[] = []
 
   @Output() areaReady = new EventEmitter<void>();
 

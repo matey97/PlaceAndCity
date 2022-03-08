@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Area, AreaChange, Change } from "../model/area";
-import { AreaAnswers } from "./information-panel/area-questions/area-questions.component";
+import { DrawnArea, AreaChange, Change, InterestArea, AreaAnswers } from "../model/area";
 
 @Component({
   selector: 'app-root',
@@ -16,8 +15,8 @@ export class AppComponent {
   status: typeof Status = Status;
   currentStatus: Status = Status.APP_INFO;
 
-  areas: Area[] = []
-  currentArea!: Area;
+  currentArea!: DrawnArea;
+  interestAreas: InterestArea[] = []
 
   constructor(
   ) {
@@ -32,7 +31,6 @@ export class AppComponent {
         this.areaDrawn = true;
         break;
       case Change.DELETE:
-        this.areas.filter((ar) => ar.id !== area.id);
         this.areaDrawn = false;
     }
   }

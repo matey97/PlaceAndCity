@@ -1,12 +1,22 @@
-export interface Area {
+export interface DrawnArea {
   id: number,
-  name: string,
   geojson: any,
+}
+
+export interface AreaAnswers {
+  name: string,
+  freeText: string,
+  questions: [{string: number}]
+}
+
+export interface InterestArea {
+  area: DrawnArea,
+  answers: AreaAnswers
 }
 
 export interface AreaChange {
   change: Change
-  area: Area
+  area: DrawnArea
 }
 
 export enum Change {
@@ -18,7 +28,6 @@ export function buildAreaChange(change: Change, id: number, geojson: any): AreaC
     change: change,
     area: {
       id: id,
-      name: "",
       geojson: geojson,
     }
   }
