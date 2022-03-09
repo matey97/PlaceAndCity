@@ -7,14 +7,16 @@
   You can also download the data from all the areas at once by pressing the button <i>Download all</i>.
 </p>
 
-<div *ngFor="let area of drawnAreas" class="d-flex justify-content-center">
-  <app-area-status [area]="area"
-                   [status]="commandStatus.get(area.id)">
-  </app-area-status>
+<div class="d-flex justify-content-center flex-wrap" style="padding: 10px">
+  <div *ngFor="let area of drawnAreas">
+    <app-area-status [area]="area"
+                     [status]="commandStatus.get(area.id)">
+    </app-area-status>
+  </div>
 </div>
 
 <div class="d-flex justify-content-center">
-  <button mat-raised-button color="primary">
+  <button mat-raised-button color="primary" [disabled]="!allDownloadsReady">
     <mat-icon>download</mat-icon>
     Download all
   </button>
