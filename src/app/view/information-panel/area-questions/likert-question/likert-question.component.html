@@ -1,16 +1,16 @@
 <mat-card class="question-card"
           [class.invalid]="!validState">
   <mat-card-title class="h6">
-    {{ question }}
-    <sup class="fw-lighter" style="font-size: 10px" *ngIf="required">(required)</sup>
+    {{ likertQuestion.question }}
+    <sup class="fw-lighter" style="font-size: 10px" *ngIf="likertQuestion.required">(required)</sup>
   </mat-card-title>
   <mat-card-subtitle>
     <div class="d-flex justify-content-between">
       <p>
-        {{ minLabel }}
+        {{ likertQuestion.minLabel }}
       </p>
       <p>
-        {{ maxLabel }}
+        {{ likertQuestion.maxLabel }}
       </p>
     </div>
   </mat-card-subtitle>

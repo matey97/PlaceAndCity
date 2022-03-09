@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { MatRadioChange } from "@angular/material/radio";
+import { LikertQuestion } from "../likert-questions";
 
 @Component({
   selector: 'app-likert-question',
@@ -16,12 +17,15 @@ import { MatRadioChange } from "@angular/material/radio";
 })
 export class LikertQuestionComponent implements OnInit, ControlValueAccessor {
 
-  @Input() question: string = "";
-  @Input() required: boolean = true;
-  @Input() min: number = 1;
-  @Input() minLabel: string = "Totally disagree";
-  @Input() max: number = 5;
-  @Input() maxLabel: string = "Completely agree";
+  @Input() likertQuestion: LikertQuestion = {
+    id: "",
+    required: false,
+    question: "",
+    minValue: 1,
+    minLabel: "Totally disagree",
+    maxValue: 5,
+    maxLabel: "Completely agree"
+  };
   @Input() validState: boolean = false;
 
   options: number[] = [];
@@ -33,7 +37,9 @@ export class LikertQuestionComponent implements OnInit, ControlValueAccessor {
   constructor() { }
 
   ngOnInit(): void {
-    this.options = Array.from({length: this.max - this.min + 1}, (_, i) => i + this.min);
+    this.options = Array.from(
+      {length: this.likertQuestion.maxValue - this.likertQuestion.minValue + 1},
+      (_, i) => i + this.likertQuestion.minValue);
   }
 
   registerOnChange(fn: any): void {
