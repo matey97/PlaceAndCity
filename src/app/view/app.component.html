@@ -33,11 +33,11 @@
           </app-drawing-info>
           <app-area-questions *ngSwitchCase="status.AREA_QUESTIONS" (answers)="onAreaAnswers($event)">
           </app-area-questions>
-          <app-areas-list-finish  *ngSwitchCase="status.FINISH"
+          <app-area-status-list  *ngSwitchCase="status.FINISH"
                                   [drawnAreas]="interestAreas"
                                   [commandStatus]="commandStatus"
                                   (areaSelected)="onAreaSelected($event)">
-          </app-areas-list-finish>
+          </app-area-status-list>
         </div>
       </div>
     </div>

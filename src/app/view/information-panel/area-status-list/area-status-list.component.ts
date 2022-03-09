@@ -3,11 +3,11 @@ import { InterestArea } from "../../../model/area";
 import { CommandStatus } from "../../../services/firestore/command";
 
 @Component({
-  selector: 'app-areas-list-finish',
-  templateUrl: './areas-list-finish.component.html',
-  styleUrls: ['./areas-list-finish.component.scss']
+  selector: 'app-area-status-list',
+  templateUrl: './area-status-list.component.html',
+  styleUrls: ['./area-status-list.component.scss']
 })
-export class AreasListFinishComponent {
+export class AreaStatusListComponent {
 
   @Input() drawnAreas: InterestArea[] = [];
   @Input() commandStatus: Map<string, CommandStatus> = new Map<string, CommandStatus>();

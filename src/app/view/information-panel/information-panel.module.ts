@@ -14,8 +14,8 @@ import { LikertQuestionComponent } from './area-questions/likert-question/likert
 import { MatRadioModule } from "@angular/material/radio";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatDividerModule } from "@angular/material/divider";
-import { AreasListFinishComponent } from './areas-list-finish/areas-list-finish.component';
-import { AreaStatusComponent } from './areas-list-finish/area-status/area-status.component';
+import { AreaStatusListComponent } from './area-status-list/area-status-list.component';
+import { AreaStatusComponent } from './area-status-list/area-status/area-status.component';
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatRippleModule } from "@angular/material/core";
 
@@ -27,14 +27,14 @@ import { MatRippleModule } from "@angular/material/core";
     DrawingInfoComponent,
     AreaQuestionsComponent,
     LikertQuestionComponent,
-    AreasListFinishComponent,
+    AreaStatusListComponent,
     AreaStatusComponent
   ],
     exports: [
         UsageInfoComponent,
         DrawingInfoComponent,
         AreaQuestionsComponent,
-        AreasListFinishComponent
+        AreaStatusListComponent
     ],
     imports: [
         CommonModule,
