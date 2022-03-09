@@ -6,9 +6,9 @@ import {
   featureGroup,
   FeatureGroup,
   GeoJSON,
-  latLng,
+  latLng, latLngBounds,
   Layer,
-  Map,
+  Map as LeafletMap,
   tileLayer
 } from "leaflet";
 import { getDrawLocal, getDrawOptions } from "./map-configuration";
@@ -32,20 +32,37 @@ export class MapViewComponent {
 
   @Input() drawEnabled: boolean = false;
 
-  _drawnAreas!: Layer[];
+  drawnAreasLayers: Layer[] = [];
+  private _drawnAreas = new Map<string, Layer>();
   @Input() set drawnAreas(interestAreas: InterestArea[]) {
-    this._drawnAreas = interestAreas
-      .map(area => GeoJSON.geometryToLayer(area.area.geojson).bindPopup(area.answers.name))
+    interestAreas
+      .forEach(area => this._drawnAreas.set(
+        area.id,
+        GeoJSON.geometryToLayer(area.area.geojson).bindPopup(area.answers.name)
+      )
+    );
+
+    this.drawnAreasLayers = Array.from(this._drawnAreas.values());
     this.drawnItems.clearLayers();
 
-    if (this.map !== undefined) {
-      this.map.setView(this.mapCenter, this.mapZoom);
+    this.setInitialViewPort();
+  }
+
+  @Input() set focusedArea(interestArea: InterestArea) {
+    if (!interestArea) {
+      this.resetViewPort();
+      return;
     }
+
+    const layer = this._drawnAreas.get(interestArea.id);
+    if (!layer) return;
+
+    this.zoomOnLayerAreaAndOpenPopup(layer);
   }
 
   @Output() areaChange = new EventEmitter<AreaChange>();
 
-  private map!: Map
+  private map!: LeafletMap;
 
   options: any;
   drawnItems: FeatureGroup = featureGroup();
@@ -69,7 +86,7 @@ export class MapViewComponent {
     this.drawLocal = getDrawLocal();
   }
 
-  onMapReady(map: Map) {
+  onMapReady(map: LeafletMap) {
     this.map = map;
   }
 
@@ -85,6 +102,32 @@ export class MapViewComponent {
 
   onDrawDeleted(e: DrawEvents.Deleted) {
     this.emitEventForChange(e.layers.getLayers(), Change.DELETE);
+  }
+
+  private setInitialViewPort() {
+    if (this.map !== undefined) {
+      this.map.setView(this.mapCenter, this.mapZoom);
+    }
+  }
+
+  private zoomOnLayerAreaAndOpenPopup(layer: Layer) {
+    const untypedLayer = layer as any;
+
+    if (!untypedLayer.editing)
+      return;
+
+    if (!untypedLayer.editing.latlngs)
+      return;
+
+    this.map.fitBounds(latLngBounds(untypedLayer.editing.latlngs[0]));
+    if (layer.getPopup()) layer.openPopup();
+  }
+
+  private resetViewPort() {
+    this.setInitialViewPort();
+    this.drawnAreasLayers
+      .filter(layer => layer.isPopupOpen())
+      .map(layer => layer.closePopup());
   }
 
   private emitEventForChange(layers: any[], changeType: Change) {

@@ -12,6 +12,7 @@
     <div class="col-lg-7 flex-fill">
       <app-map-view [drawEnabled]="mapDrawEnabled"
                     [drawnAreas]="interestAreas"
+                    [focusedArea]="focusedArea"
                     (areaChange)="onAreaChange($event)">
       </app-map-view>
     </div>

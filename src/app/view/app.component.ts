@@ -19,6 +19,7 @@ export class AppComponent {
 
   currentArea!: DrawnArea;
   interestAreas: InterestArea[] = []
+  focusedArea!: InterestArea;
 
   commandStatus: Map<string, CommandStatus> = new Map<string, CommandStatus>();
 
@@ -73,6 +74,10 @@ export class AppComponent {
   onDrawingFinished() {
     this.mapDrawEnabled = false;
     this.currentStatus = Status.FINISH;
+  }
+
+  onAreaSelected(area: InterestArea) {
+    this.focusedArea = area;
   }
 }
 
