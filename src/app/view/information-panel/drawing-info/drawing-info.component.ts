@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { InterestArea } from "../../../model/area";
+import { MatChip } from "@angular/material/chips";
 
 @Component({
   selector: 'app-drawing-info',
@@ -12,6 +13,7 @@ export class DrawingInfoComponent {
   @Input() drawnAreas: InterestArea[] = []
 
   @Output() areaReady = new EventEmitter<void>();
+  @Output() areaSelected = new EventEmitter<InterestArea>();
   @Output() finishDrawing = new EventEmitter<void>();
 
   constructor() { }
@@ -22,5 +24,10 @@ export class DrawingInfoComponent {
 
   onFinishDrawing() {
     this.finishDrawing.emit();
+  }
+
+  onAreaToggleSelected(chip: MatChip, area: InterestArea) {
+    chip.toggleSelected();
+    this.areaSelected.emit(chip.selected ? area : undefined);
   }
 }

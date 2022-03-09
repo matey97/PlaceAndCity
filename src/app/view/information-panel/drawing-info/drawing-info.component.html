@@ -31,7 +31,7 @@
   <mat-divider></mat-divider>
   <h2>Your areas:</h2>
   <mat-chip-list>
-    <mat-chip *ngFor="let area of drawnAreas">
+    <mat-chip #chip="matChip" *ngFor="let area of drawnAreas" (click)="onAreaToggleSelected(chip, area)">
       {{ area.answers.name }}
     </mat-chip>
   </mat-chip-list>
