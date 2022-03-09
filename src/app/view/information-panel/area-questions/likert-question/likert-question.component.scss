@@ -3,4 +3,9 @@
 .question-card {
   margin: $global-spacing;
   background-color: cornsilk;
+
+  &.invalid {
+    border-color: red;
+    border-style: solid;
+  }
 }

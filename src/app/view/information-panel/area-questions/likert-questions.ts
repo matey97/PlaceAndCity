@@ -1,6 +1,7 @@
 export const likertQuestions: LikertQuestion[] = [
   {
     id: "q1",
+    required: true,
     question: "Test question 1",
     minValue: 0,
     minLabel: "Totally disagree",
@@ -9,6 +10,7 @@ export const likertQuestions: LikertQuestion[] = [
   },
   {
     id: "q2",
+    required: false,
     question: "Test question 2",
     minValue: 1,
     minLabel: "Not sure",
@@ -17,6 +19,7 @@ export const likertQuestions: LikertQuestion[] = [
   },
   {
     id: "q3",
+    required: true,
     question: "Test question 3",
     minValue: 0,
     minLabel: "Totally disagree",
@@ -25,6 +28,7 @@ export const likertQuestions: LikertQuestion[] = [
   },
   {
     id: "q4",
+    required: true,
     question: "Test question 4",
     minValue: 0,
     minLabel: "Totally disagree",
@@ -35,6 +39,7 @@ export const likertQuestions: LikertQuestion[] = [
 
 export interface LikertQuestion {
   id: string,
+  required: boolean
   question: string,
   minValue: number,
   minLabel: string,

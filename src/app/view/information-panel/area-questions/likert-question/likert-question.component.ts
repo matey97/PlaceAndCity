@@ -16,11 +16,13 @@ import { MatRadioChange } from "@angular/material/radio";
 })
 export class LikertQuestionComponent implements OnInit, ControlValueAccessor {
 
-  @Input() question: string = ""
-  @Input() min: number = 1
-  @Input() minLabel: string = "Totally disagree"
-  @Input() max: number = 5
-  @Input() maxLabel: string = "Completely agree"
+  @Input() question: string = "";
+  @Input() required: boolean = true;
+  @Input() min: number = 1;
+  @Input() minLabel: string = "Totally disagree";
+  @Input() max: number = 5;
+  @Input() maxLabel: string = "Completely agree";
+  @Input() validState: boolean = false;
 
   options: number[] = [];
   value!: number;

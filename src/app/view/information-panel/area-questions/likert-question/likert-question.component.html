@@ -1,5 +1,9 @@
-<mat-card class="question-card">
-  <mat-card-title class="h6">{{ question }}</mat-card-title>
+<mat-card class="question-card"
+          [class.invalid]="!validState">
+  <mat-card-title class="h6">
+    {{ question }}
+    <sup class="fw-lighter" style="font-size: 10px" *ngIf="required">(required)</sup>
+  </mat-card-title>
   <mat-card-subtitle>
     <div class="d-flex justify-content-between">
       <p>

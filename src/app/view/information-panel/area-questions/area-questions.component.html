@@ -30,17 +30,19 @@
 
   <mat-step [stepControl]="questions" label="Answer a couple of questions">
     <form [formGroup]="questions">
-      <app-likert-question *ngFor="let question of likertQuestions"
+      <app-likert-question *ngFor="let question of likertQuestions" id="quest"
                            [formControlName]="question.id"
                            [question]="question.question"
+                           [required]="question.required"
                            [min]="question.minValue"
                            [minLabel]="question.minLabel"
                            [max]="question.maxValue"
-                           [maxLabel]="question.maxLabel"></app-likert-question>
+                           [maxLabel]="question.maxLabel"
+                           [validState]="inValidState(question.id)"></app-likert-question>
 
       <div>
         <button mat-button matStepperPrevious color="primary">Back</button>
-        <button mat-raised-button matStepperNext color="primary">Next</button>
+        <button mat-raised-button matStepperNext color="primary" (click)="onNextInQuestions()">Next</button>
       </div>
     </form>
   </mat-step>

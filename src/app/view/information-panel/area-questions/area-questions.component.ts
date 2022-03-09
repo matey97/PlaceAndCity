@@ -31,7 +31,10 @@ export class AreaQuestionsComponent implements OnInit {
 
     const questionsConfig: {[p: string]: any} = {};
     this.likertQuestions.forEach((question) => {
-      questionsConfig[question.id] = ["", Validators.required]
+      const config: any = [""]
+      if (question.required) config.push(Validators.required);
+
+      questionsConfig[question.id] = config;
     });
     this.questions = this.formBuilder.group(questionsConfig);
   }
@@ -42,5 +45,16 @@ export class AreaQuestionsComponent implements OnInit {
       freeText: this.freeText.value["text"],
       questions: this.questions.value
     });
+  }
+
+  onNextInQuestions() {
+    this.likertQuestions.forEach((likertQuestion) => {
+      this.questions.controls[likertQuestion.id].markAsTouched();
+    });
+  }
+
+  inValidState(questionId: string): boolean {
+    const control = this.questions.controls[questionId];
+    return control.valid || control.untouched;
   }
 }
