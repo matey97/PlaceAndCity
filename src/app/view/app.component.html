@@ -35,7 +35,8 @@
           </app-area-questions>
           <app-areas-list-finish  *ngSwitchCase="status.FINISH"
                                   [drawnAreas]="interestAreas"
-                                  [commandStatus]="commandStatus">
+                                  [commandStatus]="commandStatus"
+                                  (areaSelected)="onAreaSelected($event)">
           </app-areas-list-finish>
         </div>
       </div>

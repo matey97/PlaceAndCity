@@ -17,6 +17,7 @@ import { MatDividerModule } from "@angular/material/divider";
 import { AreasListFinishComponent } from './areas-list-finish/areas-list-finish.component';
 import { AreaStatusComponent } from './areas-list-finish/area-status/area-status.component';
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatRippleModule } from "@angular/material/core";
 
 
 
@@ -35,19 +36,20 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
         AreaQuestionsComponent,
         AreasListFinishComponent
     ],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatIconModule,
-    MatButtonModule,
-    MatStepperModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatRadioModule,
-    MatChipsModule,
-    MatDividerModule,
-    MatProgressBarModule
-  ],
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatIconModule,
+        MatButtonModule,
+        MatStepperModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatRadioModule,
+        MatChipsModule,
+        MatDividerModule,
+        MatProgressBarModule,
+        MatRippleModule
+    ],
 })
 export class InformationPanelModule { }
