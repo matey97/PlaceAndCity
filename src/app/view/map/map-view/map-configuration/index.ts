@@ -1,6 +1,7 @@
 import { Control, ControlPosition, FeatureGroup } from "leaflet";
 
 export interface DrawOptionsConfiguration {
+  drawingMode: boolean
   position: ControlPosition,
   polygonColor: string,
 }
@@ -8,25 +9,29 @@ export interface DrawOptionsConfiguration {
 export function getDrawOptions(drawnItems: FeatureGroup, config: DrawOptionsConfiguration): Control.DrawConstructorOptions {
   return {
     position: config.position,
-    draw: {
-      polygon: {
-        allowIntersection: false,
-        drawError: {
-          color: '#e1004f',
-          message: '<strong>Ups!<strong> you can\'t draw that!'
-        },
-        shapeOptions: {
-          color: config.polygonColor
+    draw: config.drawingMode
+      ? {
+          polygon: {
+            allowIntersection: false,
+            drawError: {
+              color: '#e1004f',
+              message: '<strong>Ups!<strong> you can\'t draw that!'
+            },
+            shapeOptions: {
+              color: config.polygonColor
+            }
+          },
+          polyline: false,
+          circle: false,
+          rectangle: false,
+          marker: false,
+          circlemarker: false
         }
-      },
-      polyline: false,
-      circle: false,
-      rectangle: false,
-      marker: false,
-      circlemarker: false
-    },
+      : undefined,
     edit: {
-      featureGroup: drawnItems
+      featureGroup: drawnItems,
+      edit: config.drawingMode ? false : {},
+      remove: !config.drawingMode
     }
   }
 }

@@ -44,6 +44,7 @@ export class MapViewComponent {
 
     this.drawnAreasLayers = Array.from(this._drawnAreas.values());
     this.drawnItems.clearLayers();
+    this.areaAlreadyDrawn = false;
 
     this.setInitialViewPort();
   }
@@ -63,11 +64,13 @@ export class MapViewComponent {
   @Output() areaChange = new EventEmitter<AreaChange>();
 
   private map!: LeafletMap;
-
   options: any;
+
   drawnItems: FeatureGroup = featureGroup();
-  drawOptions: Control.DrawConstructorOptions;
+  drawOptionsFull: Control.DrawConstructorOptions;
+  drawOptionsEdit: Control.DrawConstructorOptions;
   drawLocal: any;
+  areaAlreadyDrawn: boolean = false;
 
   constructor() {
     this.options = {
@@ -79,10 +82,8 @@ export class MapViewComponent {
     };
 
     this.drawnItems = featureGroup();
-    this.drawOptions = getDrawOptions(this.drawnItems, {
-      position: this.position,
-      polygonColor: this.polygonColor
-    });
+    this.drawOptionsFull = this.getDrawingOptions(true);
+    this.drawOptionsEdit = this.getDrawingOptions(false);
     this.drawLocal = getDrawLocal();
   }
 
@@ -94,6 +95,7 @@ export class MapViewComponent {
     this.drawnItems.addLayer(e.layer);
     this.map.fitBounds(this.drawnItems.getBounds());
     this.emitEventForChange([e.layer], Change.ADD);
+    this.areaAlreadyDrawn = true;
   }
 
   onDrawEdited(e: DrawEvents.Edited) {
@@ -102,6 +104,7 @@ export class MapViewComponent {
 
   onDrawDeleted(e: DrawEvents.Deleted) {
     this.emitEventForChange(e.layers.getLayers(), Change.DELETE);
+    this.areaAlreadyDrawn = false;
   }
 
   private setInitialViewPort() {
@@ -128,6 +131,14 @@ export class MapViewComponent {
     this.drawnAreasLayers
       .filter(layer => layer.isPopupOpen())
       .map(layer => layer.closePopup());
+  }
+
+  private getDrawingOptions(drawEnabled: boolean) {
+    return getDrawOptions(this.drawnItems, {
+      drawingMode: drawEnabled,
+      position: this.position,
+      polygonColor: this.polygonColor
+    })
   }
 
   private emitEventForChange(layers: any[], changeType: Change) {

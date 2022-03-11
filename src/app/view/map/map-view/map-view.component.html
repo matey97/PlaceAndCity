@@ -4,13 +4,20 @@
      [leafletLayers]="drawnAreasLayers"
      (leafletMapReady)="onMapReady($event)"
 >
-  <div *ngIf="drawEnabled"
-       leafletDraw
-       [leafletDrawOptions]="drawOptions"
-       [leafletDrawLocal]="drawLocal"
-       (leafletDrawCreated)="onDrawCreated($event)"
-       (leafletDrawEdited)="onDrawEdited($event)"
-       (leafletDrawDeleted)="onDrawDeleted($event)"
-  ></div>
+  <div *ngIf="drawEnabled">
+    <!-- ngIf-else not working -->
+    <div *ngIf="!areaAlreadyDrawn"
+         leafletDraw
+         [leafletDrawOptions]="drawOptionsFull"
+         [leafletDrawLocal]="drawLocal"
+         (leafletDrawCreated)="onDrawCreated($event)"></div>
+
+    <div *ngIf="areaAlreadyDrawn"
+         leafletDraw
+         [leafletDrawOptions]="drawOptionsEdit"
+         [leafletDrawLocal]="drawLocal"
+         (leafletDrawEdited)="onDrawEdited($event)"
+         (leafletDrawDeleted)="onDrawDeleted($event)"></div>
+  </div>
   <div [leafletLayer]="drawnItems"></div>
 </div>
