@@ -3,8 +3,10 @@ import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/compat
 import { InterestArea } from "../../view/interest-area";
 import { Command, CommandStatus, fromInterestArea } from "./command";
 import { Subscription } from "rxjs";
+import { createUserAreaFrom, UserArea } from "./user-area";
 
 const COMMANDS_COLLECTION = "commands";
+const USER_AREAS_COLLECTION = "user-areas";
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +15,21 @@ export class FirestoreService {
 
   constructor(private firestore: AngularFirestore) { }
 
+  async uploadInterestArea(interestArea: InterestArea): Promise<void> {
+    const userArea = createUserAreaFrom(interestArea);
+    console.log(userArea);
+    await this.docRef<UserArea>(USER_AREAS_COLLECTION, interestArea.id).set(userArea);
+  }
+
   async createDataExtractionCommandFrom(interestArea: InterestArea): Promise<void> {
     const command = fromInterestArea(interestArea);
 
-    await this.docRef(interestArea.id).set(command);
+    await this.docRef<Command>(COMMANDS_COLLECTION, interestArea.id).set(command);
   }
 
   listenForCommandStatusChange(interestArea: InterestArea, callback: (status: CommandStatus) => void): Subscription {
     const docObservable = this
-      .docRef(interestArea.id)
+      .docRef<Command>(COMMANDS_COLLECTION, interestArea.id)
       .valueChanges()
 
     return docObservable.subscribe((next) => {
@@ -29,8 +37,8 @@ export class FirestoreService {
     });
   }
 
-  private docRef(id: string): AngularFirestoreDocument<Command> {
-    return this.firestore.collection<Command>(COMMANDS_COLLECTION).doc(id);
+  private docRef<T>(collection: string, id: string): AngularFirestoreDocument<T> {
+    return this.firestore.collection<T>(collection).doc(id);
   }
 }
 

@@ -54,21 +54,20 @@ export class AppComponent {
     this.currentStatus = Status.AREA_QUESTIONS;
   }
 
-  onAreaAnswers(answers: AreaAnswers) {
+  async onAreaAnswers(answers: AreaAnswers) {
     const interestArea = buildInterestArea(this.currentArea, answers);
     this.interestAreas = this.interestAreas.concat(interestArea);
 
-    this.firestoreService.createDataExtractionCommandFrom(interestArea)
-      .then(() => {
-        const subscription = this.firestoreService
-          .listenForCommandStatusChange(interestArea, (commandStatus) => {
-            this.commandStatus = this.commandStatus.set(interestArea.id, commandStatus);
+    await this.firestoreService.uploadInterestArea(interestArea);
+    await this.firestoreService.createDataExtractionCommandFrom(interestArea);
 
-            if (commandStatus == CommandStatus.COMPLETED) {
-              subscription.unsubscribe();
-            }
-          });
-      });
+    const subscription = this.firestoreService.listenForCommandStatusChange(interestArea, (commandStatus) => {
+      this.commandStatus = this.commandStatus.set(interestArea.id, commandStatus);
+
+      if (commandStatus == CommandStatus.COMPLETED) {
+        subscription.unsubscribe();
+      }
+    })
 
     this.onStartDrawing();
   }
