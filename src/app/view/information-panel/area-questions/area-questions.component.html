@@ -3,10 +3,8 @@
 <mat-vertical-stepper #stepper [linear]="true">
   <mat-step [stepControl]="nameForm" label="Give a name to the area">
     <form [formGroup]="nameForm">
-      <mat-form-field appearance="fill">
-        <mat-label>Area's name</mat-label>
-        <input matInput formControlName="name" required>
-      </mat-form-field>
+      <app-text-question [formControlName]="nameQuestion.id"
+                         [question]="nameQuestion"></app-text-question>
 
       <div>
         <button mat-raised-button matStepperNext color="primary">Next</button>
@@ -14,12 +12,11 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="freeText" label="Write your thoughts about this area">
-    <form [formGroup]="freeText">
-      <mat-form-field appearance="fill" style="width: 100%">
-        <mat-label>Some thoughts</mat-label>
-        <textarea matInput formControlName="text" rows="8" required></textarea>
-      </mat-form-field>
+  <mat-step [stepControl]="freeQuestionsForm" label="Write your thoughts about this area">
+    <form [formGroup]="freeQuestionsForm">
+      <app-text-question *ngFor="let question of freeQuestions"
+                         [formControlName]="question.id"
+                         [question]="question"></app-text-question>
 
       <div>
         <button mat-button matStepperPrevious color="primary">Back</button>
@@ -28,8 +25,8 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="questions" label="Answer a couple of questions">
-    <form [formGroup]="questions">
+  <mat-step [stepControl]="likertQuestionsForm" label="Answer a couple of questions">
+    <form [formGroup]="likertQuestionsForm">
       <app-likert-question *ngFor="let question of likertQuestions" id="quest"
                            [formControlName]="question.id"
                            [likertQuestion]="question"
