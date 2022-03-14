@@ -1,10 +1,7 @@
-import {AreaAnswers} from "../../view/information-panel/area-questions/answers";
-import {InterestArea} from "../../view/interest-area";
+import { InterestArea, Facet } from "../../view/interest-area";
 
 export interface Command {
-  coordinates: { [key: number]: number[] }
-  answers: AreaAnswers,
-  data: { [key: string]: boolean },
+  facetsExtracted: { [key: Facet]: boolean },
   status: CommandStatus
 }
 
@@ -12,13 +9,9 @@ export enum CommandStatus {
   SUBMITTED, COMPLETED
 }
 
-export function fromInterestArea(interestArea: InterestArea) {
+export function fromInterestArea(interestArea: InterestArea): Command {
   return {
-    coordinates: { ...interestArea.area.geojson.geometry.coordinates[0] },
-    answers: interestArea.answers,
-    data: {
-      centroid: true
-    },
+    facetsExtracted: Object.fromEntries(interestArea.facetsOfInterest.map((facet) => [facet, false])),
     status: CommandStatus.SUBMITTED
   };
 }
