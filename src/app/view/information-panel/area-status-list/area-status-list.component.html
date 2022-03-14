@@ -10,7 +10,7 @@
 <div class="d-flex justify-content-center flex-wrap" style="padding: 10px">
   <div *ngFor="let area of drawnAreas">
     <app-area-status [area]="area"
-                     [status]="commandStatus.get(area.id)" (click)="onAreaSelected(area)">
+                     [status]="commandStatus.get(area.id)" (mousedown)="onAreaSelected(area)">
     </app-area-status>
   </div>
 </div>
