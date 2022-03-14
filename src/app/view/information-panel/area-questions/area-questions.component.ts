@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { likertQuestions } from "./likert-questions";
-import { AreaAnswers } from "../../../model/area";
-import { nameQuestion, freeQuestions } from "./text-questions";
-import { Question } from "./question";
+import { likertQuestions } from "./questions/likert-questions";
+import { nameQuestion, freeQuestions } from "./questions/text-questions";
+import { AreaAnswers } from "./answers";
+import { Question } from "./questions";
 
 @Component({
   selector: 'app-area-questions',

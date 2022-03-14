@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/compat/firestore";
-import { InterestArea } from "../../model/area";
+import { InterestArea } from "../../view/interest-area";
 import { Command, CommandStatus, fromInterestArea } from "./command";
 import { Subscription } from "rxjs";
 

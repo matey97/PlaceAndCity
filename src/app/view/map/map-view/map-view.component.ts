@@ -12,7 +12,8 @@ import {
   tileLayer
 } from "leaflet";
 import { getDrawLocal, getDrawOptions } from "./map-configuration";
-import { AreaChange, buildAreaChange, Change, InterestArea } from "../../../model/area";
+import { InterestArea } from "../../interest-area";
+import { buildAreaChange, Change, DrawnAreaChange } from "./drawn-area";
 
 const CASTELLON = latLng(39.986324,-0.040872)
 const DEFAULT_TILE = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -61,7 +62,7 @@ export class MapViewComponent {
     this.zoomOnLayerAreaAndOpenPopup(layer);
   }
 
-  @Output() areaChange = new EventEmitter<AreaChange>();
+  @Output() areaChange = new EventEmitter<DrawnAreaChange>();
 
   private map!: LeafletMap;
   options: any;
@@ -148,7 +149,7 @@ export class MapViewComponent {
     })
   }
 
-  private toAreaChange(layer: any, changeType: Change): AreaChange {
+  private toAreaChange(layer: any, changeType: Change): DrawnAreaChange {
     const areaId = this.drawnItems.getLayerId(layer);
     return buildAreaChange(changeType, areaId, layer.toGeoJSON());
   }

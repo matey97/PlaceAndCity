@@ -1,4 +1,4 @@
-import { Question } from "./question";
+import { Question } from "./index";
 
 export interface LikertQuestion extends Question {
   question: string,

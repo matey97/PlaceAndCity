@@ -1,4 +1,5 @@
-import {AreaAnswers, InterestArea} from "../../model/area";
+import {AreaAnswers} from "../../view/information-panel/area-questions/answers";
+import {InterestArea} from "../../view/interest-area";
 
 export interface Command {
   coordinates: { [key: number]: number[] }

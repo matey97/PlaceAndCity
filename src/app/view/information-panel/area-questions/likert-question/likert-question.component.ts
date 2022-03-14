@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { MatRadioChange } from "@angular/material/radio";
-import { LikertQuestion } from "../likert-questions";
+import { LikertQuestion } from "../questions/likert-questions";
 
 @Component({
   selector: 'app-likert-question',

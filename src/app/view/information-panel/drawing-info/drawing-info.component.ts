@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { InterestArea } from "../../../model/area";
+import { InterestArea } from "../../interest-area";
 import { MatChip } from "@angular/material/chips";
 
 @Component({

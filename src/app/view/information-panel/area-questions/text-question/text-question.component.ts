@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TextQuestion, TextQuestionType } from "../text-questions";
+import { TextQuestion, TextQuestionType } from "../questions/text-questions";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({

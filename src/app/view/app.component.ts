@@ -1,7 +1,9 @@
-import { Component} from '@angular/core';
-import { AreaAnswers, AreaChange, buildInterestArea, Change, DrawnArea, InterestArea } from "../model/area";
-import { FirestoreService} from "../services/firestore/firestore.service";
+import { Component } from '@angular/core';
+import { FirestoreService } from "../services/firestore/firestore.service";
 import { CommandStatus } from "../services/firestore/command";
+import { Change, DrawnArea, DrawnAreaChange } from "./map/map-view/drawn-area";
+import { buildInterestArea, InterestArea } from "./interest-area";
+import { AreaAnswers } from "./information-panel/area-questions/answers";
 
 @Component({
   selector: 'app-root',
@@ -28,7 +30,7 @@ export class AppComponent {
   ) {
   }
 
-  onAreaChange(areaChange: AreaChange) {
+  onAreaChange(areaChange: DrawnAreaChange) {
     const area = areaChange.area;
     switch (areaChange.change) {
       case Change.ADD:

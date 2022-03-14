@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { InterestArea } from "../../../model/area";
+import { buildInterestArea, InterestArea } from "../../interest-area";
 import { CommandStatus } from "../../../services/firestore/command";
 
 @Component({
