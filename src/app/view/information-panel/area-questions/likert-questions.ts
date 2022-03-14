@@ -1,3 +1,13 @@
+import { Question } from "./question";
+
+export interface LikertQuestion extends Question {
+  question: string,
+  minValue: number,
+  minLabel: string,
+  maxValue: number,
+  maxLabel: string
+}
+
 export const likertQuestions: LikertQuestion[] = [
   {
     id: "q1",
@@ -36,13 +46,3 @@ export const likertQuestions: LikertQuestion[] = [
     maxLabel: "Completely agree"
   },
 ]
-
-export interface LikertQuestion {
-  id: string,
-  required: boolean
-  question: string,
-  minValue: number,
-  minLabel: string,
-  maxValue: number,
-  maxLabel: string
-}
