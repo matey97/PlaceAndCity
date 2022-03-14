@@ -9,7 +9,7 @@ import { AreaQuestionsComponent } from './area-questions/area-questions.componen
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LikertQuestionComponent } from './area-questions/likert-question/likert-question.component';
 import { MatRadioModule } from "@angular/material/radio";
 import { MatChipsModule } from "@angular/material/chips";
@@ -18,6 +18,7 @@ import { AreaStatusListComponent } from './area-status-list/area-status-list.com
 import { AreaStatusComponent } from './area-status-list/area-status/area-status.component';
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatRippleModule } from "@angular/material/core";
+import { TextQuestionComponent } from './area-questions/text-question/text-question.component';
 
 
 
@@ -28,7 +29,8 @@ import { MatRippleModule } from "@angular/material/core";
     AreaQuestionsComponent,
     LikertQuestionComponent,
     AreaStatusListComponent,
-    AreaStatusComponent
+    AreaStatusComponent,
+    TextQuestionComponent
   ],
     exports: [
         UsageInfoComponent,
@@ -36,20 +38,21 @@ import { MatRippleModule } from "@angular/material/core";
         AreaQuestionsComponent,
         AreaStatusListComponent
     ],
-    imports: [
-        CommonModule,
-        MatCardModule,
-        MatIconModule,
-        MatButtonModule,
-        MatStepperModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatRadioModule,
-        MatChipsModule,
-        MatDividerModule,
-        MatProgressBarModule,
-        MatRippleModule
-    ],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatRadioModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatProgressBarModule,
+    MatRippleModule,
+    FormsModule
+  ],
 })
 export class InformationPanelModule { }

@@ -1,0 +1,29 @@
+<div class="row" *ngIf="question.type === 'short'; else long">
+  <mat-label> <b>{{question.question}}</b> <sup class="fw-lighter" style="font-size: 10px" *ngIf="question.required">(required)</sup></mat-label>
+  <mat-form-field appearance="outline">
+    <input matInput #input
+           [required]="question.required"
+           [placeholder]="placeholder"
+           [maxLength]="maxLength"
+           [(ngModel)]="value"
+           (change)="onValueChange()">
+    <mat-hint align="end">{{input.value.length}} / {{maxLength}}</mat-hint>
+  </mat-form-field>
+</div>
+
+
+<ng-template #long>
+  <div class="row">
+    <mat-label> <b>{{question.question}}</b> <sup class="fw-lighter" style="font-size: 10px" *ngIf="question.required">(required)</sup></mat-label>
+    <mat-form-field appearance="outline">
+      <textarea matInput #input
+                cdkTextareaAutosize
+                [required]="question.required"
+                [placeholder]="placeholder"
+                [maxLength]="maxLength"
+                [(ngModel)]="value"
+                (change)="onValueChange()"></textarea>
+      <mat-hint align="end">{{input.value.length}} / {{maxLength}}</mat-hint>
+    </mat-form-field>
+  </div>
+</ng-template>
