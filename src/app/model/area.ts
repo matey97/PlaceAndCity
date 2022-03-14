@@ -7,8 +7,8 @@ export interface DrawnArea {
 
 export interface AreaAnswers {
   name: string,
-  freeText: string,
-  questions: [{string: number}]
+  freeTextQuestions: [{string: string}],
+  likertQuestions: [{string: number}]
 }
 
 export interface InterestArea {

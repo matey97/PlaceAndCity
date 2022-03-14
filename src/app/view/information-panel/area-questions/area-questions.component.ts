@@ -35,8 +35,8 @@ export class AreaQuestionsComponent implements OnInit {
   onQuestionsAnswered() {
     this.answers.emit({
       name: this.nameForm.value["name"],
-      freeText: this.freeQuestionsForm.value["text"],
-      questions: this.likertQuestionsForm.value
+      freeTextQuestions: this.freeQuestionsForm.value,
+      likertQuestions: this.likertQuestionsForm.value
     });
   }
 
