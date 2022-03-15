@@ -1,10 +1,6 @@
 $global-spacing: 10px;
 
-.spaced {
+.main-container {
   padding: $global-spacing;
-}
-
-.row-no-margin {
-  margin-left: 0px;
-  margin-right: 0px;
+  height: 90vh;
 }
