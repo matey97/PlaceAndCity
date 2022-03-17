@@ -6,6 +6,7 @@ import {
   featureGroup,
   FeatureGroup,
   GeoJSON,
+  GeometryUtil,
   latLng, latLngBounds,
   Layer,
   Map as LeafletMap,
@@ -16,7 +17,8 @@ import { InterestArea } from "../../interest-area";
 import { buildAreaChange, Change, DrawnAreaChange } from "./drawn-area";
 
 const CASTELLON = latLng(39.986324,-0.040872)
-const DEFAULT_TILE = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+const DEFAULT_TILE = 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png'
+const M2INKM2 = 1000000;
 
 @Component({
   selector: 'app-map-view',
@@ -76,7 +78,7 @@ export class MapViewComponent {
   constructor() {
     this.options = {
       layers: [
-        tileLayer(DEFAULT_TILE, { maxZoom: 18 })
+        tileLayer(DEFAULT_TILE, { maxZoom: 18, attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors' })
       ],
       zoom: this.mapZoom,
       center: this.mapCenter
@@ -93,6 +95,11 @@ export class MapViewComponent {
   }
 
   onDrawCreated(e: DrawEvents.Created) {
+    if (this.isDrawnAreaTooBig(e.layer)) {
+      // TODO: warn user about area too big
+      return;
+    }
+
     this.drawnItems.addLayer(e.layer);
     this.map.fitBounds(this.drawnItems.getBounds());
     this.emitEventForChange([e.layer], Change.ADD);
@@ -100,6 +107,10 @@ export class MapViewComponent {
   }
 
   onDrawEdited(e: DrawEvents.Edited) {
+    if (this.isDrawnAreaTooBig(e.layers.getLayers()[0])) {
+      // TODO: warn user about area too big
+      return;
+    }
     this.emitEventForChange(e.layers.getLayers(), Change.MODIFY);
   }
 
@@ -117,13 +128,7 @@ export class MapViewComponent {
   private zoomOnLayerAreaAndOpenPopup(layer: Layer) {
     const untypedLayer = layer as any;
 
-    if (!untypedLayer.editing)
-      return;
-
-    if (!untypedLayer.editing.latlngs)
-      return;
-
-    this.map.fitBounds(latLngBounds(untypedLayer.editing.latlngs[0]));
+    this.map.fitBounds(latLngBounds(untypedLayer.getLatLngs()[0]));
     if (layer.getPopup()) layer.openPopup();
   }
 
@@ -140,6 +145,12 @@ export class MapViewComponent {
       position: this.position,
       polygonColor: this.polygonColor
     })
+  }
+
+  private isDrawnAreaTooBig(layer: any): boolean {
+    // TODO: add threshold
+    console.log(GeometryUtil.geodesicArea(layer.getLatLngs()[0]) / M2INKM2);
+    return false;
   }
 
   private emitEventForChange(layers: any[], changeType: Change) {
