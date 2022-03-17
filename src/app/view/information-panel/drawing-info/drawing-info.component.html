@@ -43,7 +43,7 @@
 
 </div>
 
-<div *ngIf="enableContinue" class="top-spaced">
+<div class="top-spaced">
   <mat-divider style="padding-bottom: 10px"></mat-divider>
-  <button mat-raised-button color="primary" (click)="onAreaReady()">Add area!</button>
+  <button mat-raised-button color="primary" [disabled]="!enableContinue" (click)="onAreaReady()">Add area!</button>
 </div>
