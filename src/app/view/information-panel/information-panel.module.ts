@@ -19,6 +19,9 @@ import { AreaStatusComponent } from './area-status-list/area-status/area-status.
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatRippleModule } from "@angular/material/core";
 import { TextQuestionComponent } from './area-questions/text-question/text-question.component';
+import { FacetsSelectionComponent } from './area-questions/facets-selection/facets-selection.component';
+import { MatTreeModule } from "@angular/material/tree";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 
 
@@ -30,7 +33,8 @@ import { TextQuestionComponent } from './area-questions/text-question/text-quest
     LikertQuestionComponent,
     AreaStatusListComponent,
     AreaStatusComponent,
-    TextQuestionComponent
+    TextQuestionComponent,
+    FacetsSelectionComponent
   ],
     exports: [
         UsageInfoComponent,
@@ -52,7 +56,9 @@ import { TextQuestionComponent } from './area-questions/text-question/text-quest
     MatDividerModule,
     MatProgressBarModule,
     MatRippleModule,
-    FormsModule
+    FormsModule,
+    MatTreeModule,
+    MatCheckboxModule
   ],
 })
 export class InformationPanelModule { }

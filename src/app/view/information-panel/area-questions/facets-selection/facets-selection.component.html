@@ -1,0 +1,23 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl" [formGroup]="facetsForm">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+    <button mat-icon-button disabled></button>
+    {{ node.name }}
+    <button *ngIf="node.information" mat-icon-button inline="true" (click)="shownInformation(node.information)">
+      <mat-icon>help_outline</mat-icon>
+    </button>
+  </mat-tree-node>
+
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+    <button mat-icon-button matTreeNodeToggle>
+      <mat-icon>
+        {{ treeControl.isExpanded(node) ? 'expand_more': 'chevron_right' }}
+      </mat-icon>
+    </button>
+    <mat-checkbox [formControlName]="node.name">
+      {{ node.name }}
+    </mat-checkbox>
+    <button *ngIf="node.information" mat-icon-button inline="true" (click)="shownInformation(node.information)">
+      <mat-icon>help_outline</mat-icon>
+    </button>
+  </mat-tree-node>
+</mat-tree>
