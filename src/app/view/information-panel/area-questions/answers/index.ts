@@ -1,5 +1,6 @@
 export interface AreaAnswers {
   name: string,
-  freeTextQuestions: [{string: string}],
-  likertQuestions: [{string: number}]
+  freeTextQuestions: { [key: string]: string },
+  likertQuestions: { [key: string]: string },
+  selectedClusters: { [key: string]: boolean },
 }

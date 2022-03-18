@@ -1,7 +1,7 @@
-import { InterestArea, Facet } from "../../view/interest-area";
+import { InterestArea } from "../../view/interest-area";
 
 export interface Command {
-  facetsExtracted: { [key: Facet]: boolean },
+  facetsExtracted: { [key: string]: boolean },
   status: CommandStatus
 }
 
@@ -10,8 +10,12 @@ export enum CommandStatus {
 }
 
 export function fromInterestArea(interestArea: InterestArea): Command {
+  const facets = interestArea.answers.selectedClusters;
+  const facetsExtracted: { [key: string]: boolean } = {}
+  Object.keys(facets).filter(facet => facets[facet]).map(facet => facetsExtracted[facet] = false)
+
   return {
-    facetsExtracted: Object.fromEntries(interestArea.facetsOfInterest.map((facet) => [facet, false])),
+    facetsExtracted: facetsExtracted,
     status: CommandStatus.SUBMITTED
   };
 }

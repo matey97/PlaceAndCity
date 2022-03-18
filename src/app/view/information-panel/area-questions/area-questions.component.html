@@ -39,6 +39,15 @@
     </form>
   </mat-step>
 
+  <mat-step [stepControl]="facetsForm" label="Select facets of interest">
+    <app-facets-selection [facetsForm]="facetsForm" [facetsClusters]="facetsClusters"></app-facets-selection>
+
+    <div>
+      <button mat-button matStepperPrevious color="primary">Back</button>
+      <button mat-raised-button matStepperNext color="primary">Next</button>
+    </div>
+  </mat-step>
+
   <mat-step label="Finish">
     <p>We are done with this area!</p>
 

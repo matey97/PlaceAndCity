@@ -18,7 +18,7 @@ export class FirestoreService {
 
   async uploadInterestArea(interestArea: InterestArea): Promise<void> {
     const userArea = createUserAreaFrom(interestArea);
-    console.log(userArea);
+
     await this.docRef<UserArea>(USER_AREAS_COLLECTION, interestArea.id).set(userArea);
   }
 
