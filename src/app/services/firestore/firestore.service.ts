@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ServicesModule } from "../services.module";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/compat/firestore";
 import { InterestArea } from "../../view/interest-area";
 import { Command, CommandStatus, fromInterestArea } from "./command";
@@ -9,7 +10,7 @@ const COMMANDS_COLLECTION = "commands";
 const USER_AREAS_COLLECTION = "user-areas";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: ServicesModule
 })
 export class FirestoreService {
 
